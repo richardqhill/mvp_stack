@@ -7,14 +7,25 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable is not set.")
 
-parsed = urlparse(DATABASE_URL)
-db = PostgresqlDatabase(
-    parsed.path.lstrip('/'),
-    user=parsed.username,
-    password=parsed.password,
-    host=parsed.hostname,
-    port=parsed.port or 5432
-)
+url = urlparse(DATABASE_URL)
+
+# Determine if we should require SSL
+use_ssl = os.getenv("ENVIRONMENT", "development") != "development"
+
+# Database connection params
+db_params = {
+    'database': url.path[1:],  # remove leading /
+    'user': url.username,
+    'password': url.password,
+    'host': url.hostname,
+    'port': url.port,
+}
+
+# Only add SSL options in production
+if use_ssl:
+    db_params['sslmode'] = 'require'
+
+db = PostgresqlDatabase(**db_params)
 
 
 class BaseModel(Model):

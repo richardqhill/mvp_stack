@@ -1,4 +1,4 @@
-http://:80 {
+{$BACKEND_DOMAIN} {
     bind 0.0.0.0
     root * /usr/share/caddy
     file_server

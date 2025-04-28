@@ -4,7 +4,8 @@ import os
 from db import db, Test, initialize_db
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:8080", "http://127.0.0.1:8080"])
+frontend_url = os.getenv("FRONTEND_URL", "*")
+CORS(app, origins=[frontend_url])
 
 
 # Always initialize DB on startup
