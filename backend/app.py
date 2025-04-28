@@ -1,8 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import os
 from db import db, Test, initialize_db
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:8080", "http://127.0.0.1:8080"])
+
 
 # Always initialize DB on startup
 with app.app_context():

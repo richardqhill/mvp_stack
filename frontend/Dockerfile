@@ -1,6 +1,9 @@
 FROM node:20 AS build
 WORKDIR /app
 
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copy package.json and lock file first for better Docker caching
 COPY package.json package-lock.json ./
 RUN npm install
