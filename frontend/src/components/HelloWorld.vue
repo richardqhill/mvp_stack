@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>User Info</h1>
-    <p v-if="user">ID: {{ user.id }}, Name: {{ user.name }}</p>
+    <p v-if="user">ID: {{ user.id }}, Name: {{ user.name }}, Avatar: {{ user.avatar }}</p>
     <p v-else>Loading user data...</p>
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const user = ref<{ id: number; name: string } | null>(null)
+const user = ref<{ id: number; name: string, avatar: string } | null>(null)
 
 onMounted(async () => {
   try {

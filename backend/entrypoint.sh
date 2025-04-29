@@ -35,4 +35,8 @@ except (socket.timeout, socket.error):
   fi
 done
 
+echo "Running database migrations..."
+python3 -m db.migrate
+
+echo "Starting backend server..."
 exec gunicorn -b 0.0.0.0:"${PORT:-5000}" app:app

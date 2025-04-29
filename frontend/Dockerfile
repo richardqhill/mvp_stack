@@ -15,8 +15,8 @@ RUN npm run build
 FROM caddy:2-alpine
 
 # Set the domain at build time (default localhost for local dev)
-ARG BACKEND_DOMAIN=http://:80
-ENV BACKEND_DOMAIN=${BACKEND_DOMAIN}
+ARG FRONTEND_DOMAIN=http://:80
+ENV FRONTEND_DOMAIN=${FRONTEND_DOMAIN}
 
 COPY --from=build /app/dist /usr/share/caddy
 COPY Caddyfile.template /etc/caddy/Caddyfile
