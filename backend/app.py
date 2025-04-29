@@ -2,14 +2,12 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import os
 
-from db import db
 from db.models import User
 
 
 app = Flask(__name__)
 frontend_url = os.getenv("FRONTEND_URL", "*")
 CORS(app, origins=[frontend_url])
-
 
 @app.route("/")
 def hello():
